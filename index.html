@@ -1,796 +1,867 @@
-<!-- BARRA DE NAVEGAÇÃO INTERATIVA -->
-<nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#" class="font-bold text-slate-100 tracking-tight text-sm sm:text-base flex items-center gap-2 group">
-            <span class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-brand-400 group-hover:border-brand-500 transition-colors">
-                <i class="fa-solid fa-user-gear"></i>
-            </span>
-            <span>Gustavo Guenka Xavier <span class="text-slate-500 font-normal hidden sm:inline">| PO Salesforce & IA</span></span>
-        </a>
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth scroll-pt-24">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gustavo Guenka Xavier | Product Owner (Salesforce & IA)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            950: '#052e16',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .case-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .case-card:hover {
+            transform: translateY(-4px);
+        }
+        .details-pane {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+        .details-pane.open {
+            max-height: 1200px;
+            opacity: 1;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-slate-950">
 
-        <!-- Links de Navegação Desktop -->
-        <div class="hidden md:flex space-x-6 text-xs font-semibold uppercase tracking-wider text-slate-400">
-            <a href="#objetivo" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-compass text-xs"></i> Objetivo</a>
-            <a href="#perfil" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-id-card text-xs"></i> Perfil</a>
-            <a href="#resultados" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-trophy text-xs"></i> Resultados</a>
-            <a href="#experiencia" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-briefcase text-xs"></i> Experiência</a>
-            <a href="#cases" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-boxes-stacked text-xs"></i> Cases</a>
+    <!-- BARRA DE NAVEGAÇÃO INTERATIVA -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="font-bold text-slate-100 tracking-tight text-sm sm:text-base flex items-center gap-2 group">
+                <span class="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-brand-400 group-hover:border-brand-500 transition-colors">
+                    <i class="fa-solid fa-user-gear"></i>
+                </span>
+                <span>Gustavo Guenka Xavier <span class="text-slate-500 font-normal hidden sm:inline">| PO Salesforce & IA</span></span>
+            </a>
+
+            <!-- Links de Navegação Desktop -->
+            <div class="hidden md:flex space-x-6 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <a href="#objetivo" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-compass text-xs"></i> Objetivo</a>
+                <a href="#perfil" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-id-card text-xs"></i> Perfil</a>
+                <a href="#resultados" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-trophy text-xs"></i> Resultados</a>
+                <a href="#experiencia" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-briefcase text-xs"></i> Experiência</a>
+                <a href="#cases" class="hover:text-brand-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-boxes-stacked text-xs"></i> Cases</a>
+            </div>
+
+            <!-- Botão de Ação Rápida: Copiar Contato -->
+            <button onclick="copyContactInfo()" id="copy-btn" class="px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-slate-950 bg-brand-400 hover:bg-brand-500 rounded-lg transition-all shadow-md shadow-brand-500/10 flex items-center gap-1.5">
+                <i class="fa-regular fa-copy"></i>
+                <span id="copy-btn-text">Copiar Email</span>
+            </button>
         </div>
+    </nav>
 
-        <!-- Botão de Ação Rápida: Copiar Contato -->
-        <button onclick="copyContactInfo()" id="copy-btn" class="px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-slate-950 bg-brand-400 hover:bg-brand-500 rounded-lg transition-all shadow-md shadow-brand-500/10 flex items-center gap-1.5">
-            <i class="fa-regular fa-copy"></i>
-            <span id="copy-btn-text">Copiar Email</span>
-        </button>
+    <!-- NOTIFICAÇÃO TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 border border-brand-500/50 text-slate-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <div class="text-xs font-bold text-white">Email Copiado!</div>
+            <div class="text-[11px] text-slate-400">gustavoguenka@gmail.com está na sua área de transferência.</div>
+        </div>
     </div>
-</nav>
 
-<!-- NOTIFICAÇÃO TOAST -->
-<div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 border border-brand-500/50 text-slate-100 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3">
-    <div class="w-8 h-8 rounded-full bg-brand-500/20 text-brand-400 flex items-center justify-center">
-        <i class="fa-solid fa-check"></i>
-    </div>
-    <div>
-        <div class="text-xs font-bold text-white">Email Copiado!</div>
-        <div class="text-[11px] text-slate-400">gustavoguenka@gmail.com está na sua área de transferência.</div>
-    </div>
-</div>
+    <main class="pt-28 pb-20 space-y-24">
 
-<main class="pt-28 pb-20 space-y-24">
-
-    <!-- HERO SECTION -->
-    <header class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl space-y-6">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs text-brand-400 font-medium">
-                <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
-                <i class="fa-solid fa-cloud-bolt"></i>
-                Analista de CRM Sênior | Product Owner (Salesforce & IA)
-            </div>
-            
-            <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white leading-none">
-                Gustavo Guenka Xavier
-            </h1>
-            
-            <p class="text-lg sm:text-xl text-slate-300 font-normal leading-relaxed">
-                Sou Product Owner com mais de 10 anos de experiência em marketing, CRM e liderança de projetos estratégicos. Atualmente atuo na Unimed Nacional em iniciativas de transformação do ecossistema Salesforce.
-            </p>
-
-            <!-- Badges Rápidos -->
-            <div class="flex flex-wrap gap-3 pt-2">
-                <span class="px-3 py-1.5 rounded-lg bg-sky-950/60 border border-sky-800/60 text-sky-400 text-xs font-semibold flex items-center gap-1.5">
-                    <i class="fa-solid fa-headset"></i> Service Cloud
-                </span>
-                <span class="px-3 py-1.5 rounded-lg bg-amber-950/60 border border-amber-800/60 text-amber-400 text-xs font-semibold flex items-center gap-1.5">
-                    <i class="fa-solid fa-chart-line"></i> Sales Cloud
-                </span>
-                <span class="px-3 py-1.5 rounded-lg bg-pink-950/60 border border-pink-800/60 text-pink-400 text-xs font-semibold flex items-center gap-1.5">
-                    <i class="fa-solid fa-paper-plane"></i> Marketing Cloud
-                </span>
-                <span class="px-3 py-1.5 rounded-lg bg-violet-950/60 border border-violet-800/60 text-violet-400 text-xs font-semibold flex items-center gap-1.5">
-                    <i class="fa-solid fa-robot"></i> Agentforce & IA
-                </span>
-                <span class="px-3 py-1.5 rounded-lg bg-teal-950/60 border border-teal-800/60 text-teal-400 text-xs font-semibold flex items-center gap-1.5">
-                    <i class="fa-solid fa-diagram-project"></i> Governança Complexa
-                </span>
-            </div>
-        </div>
-    </header>
-
-    <!-- 1. OBJETIVO PROFISSIONAL -->
-    <section id="objetivo" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-8 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-8">
-            <div class="flex items-center gap-3">
-                <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
-                    <i class="fa-solid fa-compass text-2xl"></i>
-                </div>
-                <div>
-                    <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block mb-1">1. Objetivo Profissional</span>
-                    <h2 class="text-2xl font-bold text-white">Posicionamento & Matriz de Atuação</h2>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="space-y-3">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                        <i class="fa-solid fa-signature text-brand-400"></i> Formato de Cargo
-                    </h3>
-                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-sm text-brand-400 font-semibold flex items-center gap-2">
-                        <i class="fa-solid fa-user-check"></i> "Analista de CRM Sênior | Product Owner (Salesforce)"
-                    </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
-                        Minha experiência formal mais recente é como Analista de CRM Sênior, mas minha atuação evoluiu para Product Owner e hoje exerço na prática atividades de PO em iniciativas Salesforce.
-                    </p>
-                </div>
-
-                <div class="space-y-3">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                        <i class="fa-solid fa-diagram-project text-brand-400"></i> Diferencial Único
-                    </h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Meu diferencial não é simplesmente conhecer Salesforce. Meu diferencial é transitar entre:
-                    </p>
-                    <div class="flex flex-wrap gap-2 pt-1">
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-briefcase text-slate-500"></i> NEGÓCIO</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-cogs text-slate-500"></i> OPERAÇÃO</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-users text-slate-500"></i> CLIENTE</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-database text-slate-500"></i> DADOS</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-code text-slate-500"></i> TECNOLOGIA</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-people-arrows text-slate-500"></i> STAKEHOLDERS</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-handshake text-slate-500"></i> FORNECEDORES</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-box-open text-slate-500"></i> PRODUTO</span>
-                        <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-brand-400 border-brand-500/30 flex items-center gap-1.5"><i class="fa-solid fa-brain text-brand-400"></i> IA</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pt-4 border-t border-slate-800/80">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-timeline text-brand-400"></i> Linha de Evolução Profissional
-                </h3>
-                <div class="flex flex-wrap items-center gap-2 text-xs font-bold text-slate-300">
-                    <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-bullhorn text-slate-500"></i> MARKETING</span>
-                    <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
-                    <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-chart-pie text-slate-500"></i> DADOS / PLANEJAMENTO</span>
-                    <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
-                    <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-heart text-slate-500"></i> CRM / RETENÇÃO</span>
-                    <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
-                    <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-face-smile text-slate-500"></i> CX</span>
-                    <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
-                    <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-cloud-bolt text-sky-400"></i> SALESFORCE</span>
-                    <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
-                    <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-slate-300"></i> PRODUCT OWNER</span>
-                    <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
-                    <span class="px-3 py-1.5 rounded-lg bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center gap-1.5"><i class="fa-solid fa-wand-magic-sparkles"></i> IA APLICADA</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. PERFIL PROFISSIONAL -->
-    <section id="perfil" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-8 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4">
-            <div class="flex items-center gap-3">
-                <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
-                    <i class="fa-solid fa-user-tie text-2xl"></i>
-                </div>
-                <div>
-                    <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block">2. Perfil Profissional</span>
-                    <h2 class="text-2xl font-bold text-white">Gustavo Guenka Xavier</h2>
-                </div>
-            </div>
-            <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-4xl">
-                Sou Product Owner com mais de 10 anos de experiência em marketing, CRM e liderança de projetos estratégicos. Atualmente atuo na Unimed Nacional em iniciativas de transformação do ecossistema Salesforce, envolvendo atendimento, vendas, CRM, experiência do beneficiário, dados e inteligência artificial.
-            </p>
-            <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-4xl">
-                Tenho experiência com gestão de stakeholders, squads multidisciplinares, fornecedores e áreas de negócio. Minha força profissional é combinar visão de negócio, conhecimento de cliente, análise de dados, tecnologia e capacidade de conduzir diferentes interesses em direção a uma solução.
-            </p>
-        </div>
-    </section>
-
-    <!-- 3. RESULTADOS COMPROVADOS -->
-    <section id="resultados" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <div class="flex items-center gap-3">
-            <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
-                <i class="fa-solid fa-trophy text-2xl"></i>
-            </div>
-            <div>
-                <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block mb-1">3. Principais Resultados Comprovados</span>
-                <h2 class="text-2xl font-bold text-white">Métricas & Impacto de Negócio</h2>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-            <!-- Resultado 1: Ouvidoria -->
-            <div class="p-8 rounded-2xl bg-gradient-to-br from-sky-950/40 via-slate-900 to-slate-950 border border-sky-800/40 space-y-4 relative overflow-hidden group hover:border-sky-500/60 transition-all shadow-lg">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-headset text-sky-400"></i> Ouvidoria CRM</span>
-                    <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
-                </div>
-                <div class="space-y-1">
-                    <div class="text-5xl sm:text-6xl font-black text-white tracking-tight">85%</div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-sky-400 block pt-1">no sistema (tempo regulatório)</span>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Com a área, desenvolvi a implantação da Ouvidoria no Salesforce Service Cloud, alcançando 85% das demandas respondidas via sistema abaixo do tempo regulatório.
-                </p>
-            </div>
-
-            <!-- Resultado 2: Sales -->
-            <div class="p-8 rounded-2xl bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 border border-amber-800/40 space-y-4 relative overflow-hidden group hover:border-amber-500/60 transition-all shadow-lg">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-400"></i> Sales Cloud</span>
-                    <i class="fa-solid fa-gauge-high text-amber-400 text-lg"></i>
+        <!-- HERO SECTION -->
+        <header class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs text-brand-400 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                    <i class="fa-solid fa-cloud-bolt"></i>
+                    Analista de CRM Sênior | Product Owner (Salesforce & IA)
                 </div>
                 
-                <div class="space-y-1">
-                    <div class="text-3xl sm:text-4xl font-black text-white tracking-tight">De 21 para 5 dias</div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-amber-400 block pt-1">~76% de redução no ciclo</span>
-                </div>
-
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Estruturei a esteira comercial no Sales Cloud (Lead à Oportunidade) e a automação do cálculo de propostas no sistema, reduzindo o tempo de emissão ao cliente.
-                </p>
-            </div>
-
-            <!-- Resultado 3: Retenção LTV -->
-            <div class="p-8 rounded-2xl bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-950 border border-emerald-800/40 space-y-4 relative overflow-hidden group hover:border-emerald-500/60 transition-all shadow-lg">
-                <div class="flex items-center justify-between">
-                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-piggy-bank text-emerald-400"></i> Retenção LTV</span>
-                    <i class="fa-solid fa-hand-holding-dollar text-emerald-400 text-lg"></i>
-                </div>
-                <div class="space-y-1">
-                    <div class="text-5xl sm:text-6xl font-black text-white tracking-tight">R$ 1,7M</div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 block pt-1">em economia estimada</span>
-                </div>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Concebi e executei estratégia de retenção baseada no cálculo de LTV para direcionar ações com mala direta e uso estratégico de estoques na Folha de S.Paulo.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. UNIMED NACIONAL -->
-    <section id="experiencia" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-                <div class="flex items-center gap-3">
-                    <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
-                        <i class="fa-solid fa-building-user text-2xl"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block mb-1">4. Principal Experiência</span>
-                        <h2 class="text-2xl font-bold text-white">Unimed Nacional</h2>
-                    </div>
-                </div>
-                <span class="px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-xs font-mono text-slate-400 w-fit flex items-center gap-1.5">
-                    <i class="fa-solid fa-calendar-days text-slate-500"></i> Mai/2022 – Atual
-                </span>
-            </div>
-
-            <p class="text-sm text-slate-300 leading-relaxed">
-                <strong>Trajetória na empresa:</strong> Entrei atuando em CX e CRM. Inicialmente fui responsável por CRM. Ao longo da evolução do projeto, passei a atuar como Product Owner em diferentes frentes do ecossistema Salesforce. Hoje minha atuação está fortemente concentrada na transformação do atendimento e das operações através do Salesforce.
-            </p>
-
-            <div>
-                <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <i class="fa-solid fa-microchip text-brand-400"></i> Tecnologias & Domínios de Atuação
-                </h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 rounded-md bg-sky-950/40 border border-sky-800/60 text-xs text-sky-300 flex items-center gap-1.5"><i class="fa-solid fa-cloud-bolt text-sky-400"></i> Service Cloud</span>
-                    <span class="px-3 py-1 rounded-md bg-amber-950/40 border border-amber-800/60 text-xs text-amber-300 flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-amber-400"></i> Sales Cloud</span>
-                    <span class="px-3 py-1 rounded-md bg-pink-950/40 border border-pink-800/60 text-xs text-pink-300 flex items-center gap-1.5"><i class="fa-solid fa-paper-plane text-pink-400"></i> Marketing Cloud</span>
-                    <span class="px-3 py-1 rounded-md bg-violet-950/40 border border-violet-800/60 text-xs text-violet-300 flex items-center gap-1.5"><i class="fa-solid fa-robot text-violet-400"></i> Agentforce</span>
-                    <span class="px-3 py-1 rounded-md bg-emerald-950/40 border border-emerald-800/60 text-xs text-emerald-300 flex items-center gap-1.5"><i class="fa-solid fa-brain text-emerald-400"></i> IA Aplicada</span>
-                    <span class="px-3 py-1 rounded-md bg-rose-950/40 border border-rose-800/60 text-xs text-rose-300 flex items-center gap-1.5"><i class="fa-solid fa-heart text-rose-400"></i> CRM</span>
-                    <span class="px-3 py-1 rounded-md bg-amber-950/40 border border-amber-800/60 text-xs text-amber-300 flex items-center gap-1.5"><i class="fa-solid fa-face-smile text-amber-300"></i> CX</span>
-                    <span class="px-3 py-1 rounded-md bg-teal-950/40 border border-teal-800/60 text-xs text-teal-300 flex items-center gap-1.5"><i class="fa-solid fa-database text-teal-400"></i> Dados</span>
-                    <span class="px-3 py-1 rounded-md bg-indigo-950/40 border border-indigo-800/60 text-xs text-indigo-300 flex items-center gap-1.5"><i class="fa-solid fa-diagram-project text-indigo-400"></i> Governança Transversal</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CASES REAIS COM FILTRO DINÂMICO E CARDS EXPANSÍVEIS -->
-    <section id="cases" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
-                    <i class="fa-solid fa-boxes-stacked text-2xl"></i>
-                </div>
-                <div>
-                    <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block mb-1">Portfolio de Produtos</span>
-                    <h2 class="text-3xl font-black text-white">Cases Reais & Arquitetura</h2>
-                </div>
-            </div>
-
-            <!-- FILTROS -->
-            <div class="flex flex-wrap gap-2 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800">
-                <button onclick="filterCases('all')" id="tab-all" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-white transition-all">
-                    Todos (10)
-                </button>
-                <button onclick="filterCases('salesforce')" id="tab-salesforce" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-sky-400 hover:bg-sky-950/50 transition-all flex items-center gap-1">
-                    <i class="fa-solid fa-cloud-bolt text-sky-400"></i> Salesforce
-                </button>
-                <button onclick="filterCases('ai')" id="tab-ai" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-violet-400 hover:bg-violet-950/50 transition-all flex items-center gap-1">
-                    <i class="fa-solid fa-robot text-violet-400"></i> IA & LLM
-                </button>
-                <button onclick="filterCases('gov')" id="tab-gov" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-400 hover:bg-teal-950/50 transition-all flex items-center gap-1">
-                    <i class="fa-solid fa-shield-halved text-teal-400"></i> Governança
-                </button>
-                <button onclick="filterCases('crm')" id="tab-crm" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-emerald-400 hover:bg-emerald-950/50 transition-all flex items-center gap-1">
-                    <i class="fa-solid fa-piggy-bank text-emerald-400"></i> CRM & LTV
-                </button>
-            </div>
-        </div>
-
-        <!-- CONTAINER DOS CARDS DE CASES -->
-        <div class="space-y-6" id="cases-container">
-
-            <!-- CASE 5: OUVIDORIA -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-sky-950/30 via-slate-900 to-slate-950 border border-sky-800/40 space-y-4" data-category="salesforce">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-sky-950/80 border border-sky-800 text-xs font-semibold text-sky-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-headset"></i> Service Cloud | Ouvidoria
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
-                        <i class="fa-solid fa-circle-check"></i> 85% Respostas no Sistema
-                    </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">Transformando a Ouvidoria em uma operação integrada ao Salesforce</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Implantação da frente de Ouvidoria no Service Cloud integrando negócio, TI e operação com respostas abaixo do tempo regulatório.
+                <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white leading-none">
+                    Gustavo Guenka Xavier
+                </h1>
+                
+                <p class="text-lg sm:text-xl text-slate-300 font-normal leading-relaxed">
+                    Sou Product Owner com mais de 10 anos de experiência em marketing, CRM e liderança de projetos estratégicos. Atualmente atuo na Unimed Nacional em iniciativas de transformação do ecossistema Salesforce.
                 </p>
 
-                <button onclick="toggleCaseDetails('case-5')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-sky-950/40 border border-slate-800 hover:border-sky-500/40 text-xs font-bold text-sky-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Arquitetura & Detalhes do Produto</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-5"></i>
-                </button>
-
-                <div id="case-5" class="details-pane space-y-4 pt-2">
-                    <div class="grid md:grid-cols-3 gap-4 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                            <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-sky-400"></i> Contexto:</strong>
-                            A frente de Ouvidoria requeria centralização absoluta para garantir atendimento dentro do prazo regulatório rigoroso da ANS.
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                            <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-user-gear text-sky-400"></i> Atuação como PO:</strong>
-                            Mapeei o fluxo completo de tratativas entre Ouvidoria, Jurídico e Operação, construindo os requisitos de regras e automações no Service Cloud.
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-sky-950/30 border border-sky-800/50">
-                            <strong class="text-sky-400 block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-trophy"></i> Resultado:</strong>
-                            <span class="font-semibold text-white">85% das demandas passaram a ser respondidas via sistema abaixo do tempo regulatório.</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- CASE 6: SALES CLOUD -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-amber-950/30 via-slate-900 to-slate-950 border border-amber-800/40 space-y-4" data-category="salesforce">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-amber-950/80 border border-amber-800 text-xs font-semibold text-amber-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-bolt"></i> Sales Cloud | Ciclo Comercial
+                <!-- Badges Rápidos -->
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <span class="px-3 py-1.5 rounded-lg bg-sky-950/60 border border-sky-800/60 text-sky-400 text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-headset"></i> Service Cloud
                     </span>
-                    <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
-                        <i class="fa-solid fa-gauge-high"></i> ~76% Redução de Ciclo
+                    <span class="px-3 py-1.5 rounded-lg bg-amber-950/60 border border-amber-800/60 text-amber-400 text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-chart-line"></i> Sales Cloud
                     </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">De 21 para 5 dias: redução do ciclo de apresentação de propostas</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Estruturação da jornada comercial no Sales Cloud (Lead à Oportunidade) e automação do cálculo de propostas na plataforma.
-                </p>
-
-                <button onclick="toggleCaseDetails('case-6')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-amber-950/40 border border-slate-800 hover:border-amber-500/40 text-xs font-bold text-amber-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Arquitetura & Detalhes do Produto</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-6"></i>
-                </button>
-
-                <div id="case-6" class="details-pane space-y-4 pt-2">
-                    <div class="grid md:grid-cols-3 gap-4 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                            <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-file-excel text-amber-400"></i> Desafio Inicial:</strong>
-                            A elaboração e cálculo de propostas comerciais dependiam de planilhas dispersas e processos manuais morosos.
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                            <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-sliders text-amber-400"></i> Solução de Produto:</strong>
-                            Desenhamos a jornada unificada no Salesforce Sales Cloud, automatizando as regras de precificação e aprovações.
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-amber-950/30 border border-amber-800/50">
-                            <strong class="text-amber-400 block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Ganho de Eficiência:</strong>
-                            Tempo de emissão de novas propostas caiu de 21 para 5 dias (~76% de ganho de produtividade).
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- CASE 7: CENTRAL EXCLUSIVO & SAC -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-sky-950/30 via-slate-900 to-slate-950 border border-sky-800/40 space-y-4" data-category="salesforce">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-sky-950/80 border border-sky-800 text-xs font-semibold text-sky-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-eye"></i> Service Cloud | Implantação Exclusivo & SAC
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
-                        <i class="fa-solid fa-star"></i> Implantação Destaque & Humanizada
-                    </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">Liderança End-to-End: Da Operação Exclusivo à Expansão SAC (~400 operadores)</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Implantação do Salesforce na Operação Exclusivo reconhecida como a melhor e mais humanizada da área. Rampa rápida de absorção em 15 dias de operação assistida e estabilização do TMA de 12 para 9-10 min. Liderança do planejamento de ponta a ponta para a expansão completa SAC (~400 pessoas).
-                </p>
-
-                <button onclick="toggleCaseDetails('case-7')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-sky-950/40 border border-slate-800 hover:border-sky-500/40 text-xs font-bold text-sky-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Métricas de Absorção & Próxima Fase</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-7"></i>
-                </button>
-
-                <div id="case-7" class="details-pane space-y-4 pt-2">
-                    <div class="space-y-3 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
-                        <div class="grid md:grid-cols-3 gap-3">
-                            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-heart text-rose-400"></i> Feedback & Absorção:</strong>
-                                Reconhecimento como a melhor e mais humanizada implantação. Curva de aprendizado rápida em apenas 15 dias de operação assistida.
-                            </div>
-                            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                                <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-stopwatch text-amber-400"></i> Curva de TMA:</strong>
-                                TMA base (8-9 min) subiu para 12 min nos primeiros dias de mudança e já estabilizou em 9-10 min com ajustes contínuos.
-                            </div>
-                            <div class="p-3.5 rounded-xl bg-sky-950/40 border border-sky-800/50">
-                                <strong class="text-sky-400 block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-bullseye"></i> Próxima Fase (End-to-End):</strong>
-                                Liderança do planejamento e entrega completa da expansão para ~400 operadores do SAC com Visão 360º.
-                            </div>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-3">
-                            <i class="fa-solid fa-book-bookmark text-sky-400 text-lg"></i>
-                            <span><strong class="text-white">Gestão de Conhecimento:</strong> Material estruturado de ~500 páginas e suporte inteligente via IA/NotebookLM para garantir o sucesso do novo roll-out.</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- CASE 8: NOTEBOOKLM / IA NA CENTRAL -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-violet-950/40 via-slate-900 to-slate-950 border border-violet-800/50 space-y-4" data-category="ai">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-violet-950/80 border border-violet-800 text-xs font-semibold text-violet-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-brain"></i> IA Generativa | NotebookLM
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono flex items-center gap-1">
-                        <i class="fa-solid fa-spinner animate-spin text-xs"></i> Em Andamento
-                    </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">IA aplicada como primeira camada de suporte operacional</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Estruturação do NotebookLM para triagem inteligente de dúvidas, redução de chamados desnecessários e qualificação da abertura de tickets.
-                </p>
-
-                <button onclick="toggleCaseDetails('case-8')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-violet-950/40 border border-slate-800 hover:border-violet-500/40 text-xs font-bold text-violet-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Arquitetura & Fluxo da IA</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-8"></i>
-                </button>
-
-                <div id="case-8" class="details-pane space-y-4 pt-2">
-                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 space-y-2">
-                        <span class="text-violet-400 font-sans block text-xs font-bold mb-2 flex items-center gap-2">
-                            <i class="fa-solid fa-sitemap"></i> FLUXO CONCEITUAL DE TRIAGEM COM IA:
-                        </span>
-                        <div class="flex flex-wrap items-center gap-2 text-slate-300">
-                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">Dúvida do Operador</span>
-                            <i class="fa-solid fa-arrow-right text-slate-600"></i>
-                            <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">Consulta Base IA</span>
-                            <i class="fa-solid fa-arrow-right text-slate-600"></i>
-                            <span class="px-2 py-1 rounded bg-violet-950 text-violet-300 border border-violet-800">Análise Inteligente</span>
-                        </div>
-                        <div class="grid sm:grid-cols-2 gap-2 font-sans text-xs pt-2">
-                            <div class="p-2.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 flex items-center gap-2">
-                                <i class="fa-solid fa-lightbulb"></i> Dúvida Resolvível → Orientação Imediata ao Operador
-                            </div>
-                            <div class="p-2.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-300 flex items-center gap-2">
-                                <i class="fa-solid fa-bug"></i> Bug Real → Abertura Estruturada do Chamado
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- CASE 9: AGENTFORCE -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-violet-950/40 via-slate-900 to-slate-950 border border-violet-800/50 space-y-4" data-category="ai">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-violet-950/80 border border-violet-800 text-xs font-semibold text-violet-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-robot"></i> Agentforce | IA Conversacional
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
-                        Pioneiro América Latina
-                    </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">IA Conversacional Autônoma para Agendamentos Complexos</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Participação na construção de agente de IA voltado ao agendamento autônomo com regras de negócio densas e alta complexidade operacional.
-                </p>
-
-                <button onclick="toggleCaseDetails('case-9')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-violet-950/40 border border-slate-800 hover:border-violet-500/40 text-xs font-bold text-violet-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Detalhes da Solução Agentforce</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-9"></i>
-                </button>
-
-                <div id="case-9" class="details-pane space-y-4 pt-2">
-                    <p class="text-xs text-slate-300 leading-relaxed border-t border-slate-800/80 pt-3">
-                        Atuação direta no apoio e desenho funcional da solução pioneira baseada na plataforma Agentforce do Salesforce. O desafio envolveu traduzir a complexidade de agendas, autorizações e disponibilidades operacionais em diálogos fluidos conduzidos pela IA.
-                    </p>
-                </div>
-            </article>
-
-            <!-- CASE 10: GOVERNANÇA TRANSVERSAL -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-teal-950/30 via-slate-900 to-slate-950 border border-teal-800/40 space-y-4" data-category="gov">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-teal-950/80 border border-teal-800 text-xs font-semibold text-teal-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-network-wired"></i> Governança Transversal | POs
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-mono">
-                        Padrão Unificado
-                    </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">Unificação de Casos e Governança Entre Squads do Programa</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Atuação no fórum de POs (frente "Desentupidora") para solução de gargalos transversais e padronização da arquitetura de Casos.
-                </p>
-
-                <button onclick="toggleCaseDetails('case-10')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-teal-950/40 border border-slate-800 hover:border-teal-500/40 text-xs font-bold text-teal-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Arquitetura da Governança</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-10"></i>
-                </button>
-
-                <div id="case-10" class="details-pane space-y-4 pt-2">
-                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex flex-wrap items-center gap-2 border-t border-slate-800/80">
-                        <span>Múltiplos Padrões por Área</span> <i class="fa-solid fa-arrow-right text-slate-600"></i>
-                        <span>Governança Fórum POs</span> <i class="fa-solid fa-arrow-right text-slate-600"></i>
-                        <span class="text-teal-400 font-bold">Padrão Unificado de Casos</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- CASE 11: MARKETING CLOUD -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-pink-950/30 via-slate-900 to-slate-950 border border-pink-800/40 space-y-4" data-category="salesforce">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-pink-950/80 border border-pink-800 text-xs font-semibold text-pink-300 flex items-center gap-1.5">
+                    <span class="px-3 py-1.5 rounded-lg bg-pink-950/60 border border-pink-800/60 text-pink-400 text-xs font-semibold flex items-center gap-1.5">
                         <i class="fa-solid fa-paper-plane"></i> Marketing Cloud
                     </span>
-                    <span class="px-2.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-mono">
-                        CRM & Automações
+                    <span class="px-3 py-1.5 rounded-lg bg-violet-950/60 border border-violet-800/60 text-violet-400 text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-robot"></i> Agentforce & IA
+                    </span>
+                    <span class="px-3 py-1.5 rounded-lg bg-teal-950/60 border border-teal-800/60 text-teal-400 text-xs font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-diagram-project"></i> Governança Complexa
                     </span>
                 </div>
+            </div>
+        </header>
 
-                <h3 class="text-xl font-bold text-white">Da implantação AS IS à operação complexa de CRM</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Evolução do Marketing Cloud para estruturar réguas automatizadas, taxonomias e comunicação com áreas operacionais críticas.
-                </p>
-
-                <button onclick="toggleCaseDetails('case-11')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-pink-950/40 border border-slate-800 hover:border-pink-500/40 text-xs font-bold text-pink-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Evolução do Produto</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-11"></i>
-                </button>
-
-                <div id="case-11" class="details-pane space-y-4 pt-2">
-                    <p class="text-xs text-slate-300 leading-relaxed border-t border-slate-800/80 pt-3">
-                        Atuação como PO responsável pelo Marketing Cloud, migrando de réguas pontuais para automações complexas integradas a remoção/movimentação de clientes e recursos próprios.
-                    </p>
-                </div>
-            </article>
-
-            <!-- CASE 12: PREFERÊNCIAS -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-emerald-950/30 via-slate-900 to-slate-950 border border-emerald-800/40 space-y-4" data-category="crm">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-emerald-950/80 border border-emerald-800 text-xs font-semibold text-emerald-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-sliders"></i> Dados Quentes & CX
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
-                        Hiperpersonalização
-                    </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">Organização, Qualificação de Contatos e Central de Preferências</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Ranking de confiabilidade de contatos por recência/fonte e criação da Central de Preferências para empoderar a escolha do cliente.
-                </p>
-
-                <button onclick="toggleCaseDetails('case-12')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/40 text-xs font-bold text-emerald-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Etapas de Dados & CX</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-12"></i>
-                </button>
-
-                <div id="case-12" class="details-pane space-y-4 pt-2">
-                    <div class="grid md:grid-cols-3 gap-3 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
-                        <div class="p-3 rounded-lg bg-slate-950 border border-slate-800">
-                            <strong class="text-white block mb-1">1. Mapeamento:</strong> Origens e canais dispersos de contatos.
-                        </div>
-                        <div class="p-3 rounded-lg bg-slate-950 border border-slate-800">
-                            <strong class="text-white block mb-1">2. Priorização:</strong> Score por recência e peso da fonte.
-                        </div>
-                        <div class="p-3 rounded-lg bg-emerald-950/30 border border-emerald-800/50">
-                            <strong class="text-emerald-400 block mb-1">3. Preferências:</strong> Autonomia de canais/temas para o cliente.
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- CASE 13: FDA -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-teal-950/30 via-slate-900 to-slate-950 border border-teal-800/40 space-y-4" data-category="gov">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-teal-950/80 border border-teal-800 text-xs font-semibold text-teal-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-shield-halved"></i> FDA | Processos Complexos
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold flex items-center gap-1">
-                        <i class="fa-solid fa-circle-check"></i> Sucesso Absoluto de Implantação
-                    </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">Estruturação de Produto em Processo de Alta Complexidade Regulatória</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Implantação do FDA realizada junto da Central Exclusivo com pouquíssimas ocorrências e altíssima satisfação de ponta a ponta entre Regulação (Auditoria Médica), Redes, Backoffice, Tributário e Financeiro.
-                </p>
-
-                <button onclick="toggleCaseDetails('case-13')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-teal-950/40 border border-slate-800 hover:border-teal-500/40 text-xs font-bold text-teal-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Stakeholders & Áreas Envolvidas</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-13"></i>
-                </button>
-
-                <div id="case-13" class="details-pane space-y-4 pt-2">
-                    <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800/80">
-                        <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-scale-balanced text-teal-400"></i> Regulação (Auditoria)</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-circle-nodes text-teal-400"></i> Redes</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-building text-teal-400"></i> Backoffice</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-calculator text-teal-400"></i> Tributário</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-coins text-teal-400"></i> Financeiro</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- CASE 14: INTERCÂMBIO -->
-            <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-teal-950/30 via-slate-900 to-slate-950 border border-teal-800/40 space-y-4" data-category="gov">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-md bg-teal-950/80 border border-teal-800 text-xs font-semibold text-teal-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-comments"></i> Redes Intercâmbio | Omnichannel
-                    </span>
-                    <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono flex items-center gap-1">
-                        <i class="fa-solid fa-pen-ruler text-xs"></i> Em Refinamento
-                    </span>
-                </div>
-
-                <h3 class="text-xl font-bold text-white">Mapeamento e Unificação da Jornada de Atendimento Omnichannel</h3>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Refinamento e mapeamento end-to-end integrando canais (incluindo WhatsApp) para unificar tratativas operacionais em uma jornada única.
-                </p>
-
-                <button onclick="toggleCaseDetails('case-14')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-teal-950/40 border border-slate-800 hover:border-teal-500/40 text-xs font-bold text-teal-400 flex items-center justify-between transition-all">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Detalhes do Mapeamento</span>
-                    <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-14"></i>
-                </button>
-
-                <div id="case-14" class="details-pane space-y-4 pt-2">
-                    <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800/80">
-                        <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-route text-slate-400"></i> Process Mapping</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp Integration</span>
-                        <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-timeline text-slate-400"></i> Jornada Única</span>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-    </section>
-
-    <!-- FOLHA -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <!-- 1. OBJETIVO PROFISSIONAL -->
+        <section id="objetivo" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="p-8 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-8">
                 <div class="flex items-center gap-3">
-                    <div class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                        <i class="fa-solid fa-newspaper text-2xl"></i>
+                    <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
+                        <i class="fa-solid fa-compass text-2xl"></i>
                     </div>
                     <div>
-                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-1">Experiência Anterior</span>
-                        <h2 class="text-2xl font-bold text-white">Folha de S.Paulo</h2>
+                        <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block mb-1">1. Objetivo Profissional</span>
+                        <h2 class="text-2xl font-bold text-white">Posicionamento & Matriz de Atuação</h2>
                     </div>
                 </div>
-                <span class="px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-xs font-mono text-slate-400 w-fit">
-                    Dez/2013 – Mai/2019
-                </span>
-            </div>
-            <p class="text-xs sm:text-sm text-slate-300">
-                Atuação em diferentes posições que demonstram que minha visão estratégica de cliente, dados e retenção antecede a experiência com a plataforma Salesforce.
-            </p>
 
-            <div class="p-6 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
-                    <strong class="text-emerald-400 text-sm font-bold uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-piggy-bank text-emerald-400"></i> Case Relevante — Retenção por LTV
-                    </strong>
-                    <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 w-fit">
-                        Economia estimada de R$ 1,7 milhão
-                    </span>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-3">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-signature text-brand-400"></i> Formato de Cargo
+                        </h3>
+                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-sm text-brand-400 font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-user-check"></i> "Analista de CRM Sênior | Product Owner (Salesforce)"
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            Minha experiência formal mais recente é como Analista de CRM Sênior, mas minha atuação evoluiu para Product Owner e hoje exerço na prática atividades de PO em iniciativas Salesforce.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                            <i class="fa-solid fa-diagram-project text-brand-400"></i> Diferencial Único
+                        </h3>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Meu diferencial não é simplesmente conhecer Salesforce. Meu diferencial é transitar entre:
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-briefcase text-slate-500"></i> NEGÓCIO</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-cogs text-slate-500"></i> OPERAÇÃO</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-users text-slate-500"></i> CLIENTE</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-database text-slate-500"></i> DADOS</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-code text-slate-500"></i> TECNOLOGIA</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-people-arrows text-slate-500"></i> STAKEHOLDERS</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-handshake text-slate-500"></i> FORNECEDORES</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-box-open text-slate-500"></i> PRODUTO</span>
+                            <span class="px-2.5 py-1 rounded-md bg-slate-950 border border-slate-800 text-xs font-medium text-brand-400 border-brand-500/30 flex items-center gap-1.5"><i class="fa-solid fa-brain text-brand-400"></i> IA</span>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                    Estratégia de retenção baseada no cálculo de LTV (Life Time Value) para direcionamento de ações com públicos prioritários, utilizando estrategicamente o estoque de coleções de produtos para evitar cancelamentos de assinaturas.
+
+                <div class="pt-4 border-t border-slate-800/80">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-timeline text-brand-400"></i> Linha de Evolução Profissional
+                    </h3>
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-bold text-slate-300">
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-bullhorn text-slate-500"></i> MARKETING</span>
+                        <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-chart-pie text-slate-500"></i> DADOS / PLANEJAMENTO</span>
+                        <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-heart text-slate-500"></i> CRM / RETENÇÃO</span>
+                        <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-face-smile text-slate-500"></i> CX</span>
+                        <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-cloud-bolt text-sky-400"></i> SALESFORCE</span>
+                        <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
+                        <span class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-slate-300"></i> PRODUCT OWNER</span>
+                        <i class="fa-solid fa-chevron-right text-slate-600 text-xs"></i>
+                        <span class="px-3 py-1.5 rounded-lg bg-brand-500/10 border border-brand-500/30 text-brand-400 flex items-center gap-1.5"><i class="fa-solid fa-wand-magic-sparkles"></i> IA APLICADA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PERFIL PROFISSIONAL -->
+        <section id="perfil" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="p-8 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
+                        <i class="fa-solid fa-user-tie text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block">2. Perfil Profissional</span>
+                        <h2 class="text-2xl font-bold text-white">Gustavo Guenka Xavier</h2>
+                    </div>
+                </div>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-4xl">
+                    Sou Product Owner com mais de 10 anos de experiência em marketing, CRM e liderança de projetos estratégicos. Atualmente atuo na Unimed Nacional em iniciativas de transformação do ecossistema Salesforce, envolvendo atendimento, vendas, CRM, experiência do beneficiário, dados e inteligência artificial.
+                </p>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-4xl">
+                    Tenho experiência com gestão de stakeholders, squads multidisciplinares, fornecedores e áreas de negócio. Minha força profissional é combinar visão de negócio, conhecimento de cliente, análise de dados, tecnologia e capacidade de conduzir diferentes interesses em direção a uma solução.
                 </p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- RODAPÉ & CONTATO -->
-    <footer id="contato" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 border-t border-slate-800">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div>
-                <h3 class="text-lg font-bold text-white">Gustavo Guenka Xavier</h3>
-                <p class="text-xs text-slate-400">Analista de CRM Sênior | Product Owner (Salesforce & IA)</p>
-            </div>
+        <!-- 3. RESULTADOS COMPROVADOS -->
+        <section id="resultados" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div class="flex items-center gap-3">
-                <a href="https://linkedin.com/in/gustavoguenka" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white hover:border-slate-700 transition-all flex items-center gap-2">
-                    <i class="fa-brands fa-linkedin text-sm text-sky-400"></i>
-                    <span>LinkedIn</span>
-                </a>
-                <button onclick="copyContactInfo()" class="px-4 py-2 rounded-lg bg-brand-400 text-slate-950 text-xs font-bold hover:bg-brand-500 transition-all flex items-center gap-2">
-                    <i class="fa-regular fa-envelope"></i>
-                    <span>gustavoguenka@gmail.com</span>
-                </button>
+                <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
+                    <i class="fa-solid fa-trophy text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block mb-1">3. Principais Resultados Comprovados</span>
+                    <h2 class="text-2xl font-bold text-white">Métricas & Impacto de Negócio</h2>
+                </div>
             </div>
-        </div>
-        <p class="text-xs text-slate-600 text-center mt-12">
-            © Gustavo Guenka Xavier. Portfólio Profissional Interativo.
-        </p>
-    </footer>
 
-</main>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Resultado 1: Ouvidoria -->
+                <div class="p-8 rounded-2xl bg-gradient-to-br from-sky-950/40 via-slate-900 to-slate-950 border border-sky-800/40 space-y-4 relative overflow-hidden group hover:border-sky-500/60 transition-all shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-sky-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-headset text-sky-400"></i> Ouvidoria CRM</span>
+                        <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-5xl sm:text-6xl font-black text-white tracking-tight">85%</div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-sky-400 block pt-1">no sistema (tempo regulatório)</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Com a área, desenvolvi a implantação da Ouvidoria no Salesforce Service Cloud, alcançando 85% das demandas respondidas via sistema abaixo do tempo regulatório.
+                    </p>
+                </div>
 
-<!-- SCRIPTS DE INTERATIVIDADE -->
-<script>
-    function filterCases(category) {
-        const cards = document.querySelectorAll('.case-card');
-        const tabs = document.querySelectorAll('.filter-tab');
+                <!-- Resultado 2: Sales -->
+                <div class="p-8 rounded-2xl bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 border border-amber-800/40 space-y-4 relative overflow-hidden group hover:border-amber-500/60 transition-all shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-400"></i> Sales Cloud</span>
+                        <i class="fa-solid fa-gauge-high text-amber-400 text-lg"></i>
+                    </div>
+                    
+                    <div class="space-y-1">
+                        <div class="text-3xl sm:text-4xl font-black text-white tracking-tight">De 21 para 5 dias</div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-400 block pt-1">~76% de redução no ciclo</span>
+                    </div>
 
-        tabs.forEach(tab => {
-            tab.classList.remove('bg-slate-800', 'text-white');
-            tab.classList.add('text-slate-400');
-        });
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Estruturei a esteira comercial no Sales Cloud (Lead à Oportunidade) e a automação do cálculo de propostas no sistema, reduzindo o tempo de emissão ao cliente.
+                    </p>
+                </div>
 
-        const activeTab = document.getElementById(`tab-${category}`);
-        if (activeTab) {
-            activeTab.classList.add('bg-slate-800', 'text-white');
-            activeTab.classList.remove('text-slate-400');
-        }
+                <!-- Resultado 3: Retenção LTV -->
+                <div class="p-8 rounded-2xl bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-950 border border-emerald-800/40 space-y-4 relative overflow-hidden group hover:border-emerald-500/60 transition-all shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-piggy-bank text-emerald-400"></i> Retenção LTV</span>
+                        <i class="fa-solid fa-hand-holding-dollar text-emerald-400 text-lg"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-5xl sm:text-6xl font-black text-white tracking-tight">R$ 1,7M</div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 block pt-1">em economia estimada</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Concebi e executei estratégia de retenção baseada no cálculo de LTV para direcionar ações com mala direta e uso estratégico de estoques na Folha de S.Paulo.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-        cards.forEach(card => {
-            if (category === 'all' || card.dataset.category === category) {
-                card.style.display = 'block';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 50);
-            } else {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(10px)';
-                setTimeout(() => {
-                    card.style.display = 'none';
-                }, 300);
+        <!-- 4. UNIMED NACIONAL -->
+        <section id="experiencia" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
+                            <i class="fa-solid fa-building-user text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block mb-1">4. Principal Experiência</span>
+                            <h2 class="text-2xl font-bold text-white">Unimed Nacional</h2>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-xs font-mono text-slate-400 w-fit flex items-center gap-1.5">
+                        <i class="fa-solid fa-calendar-days text-slate-500"></i> Mai/2022 – Atual
+                    </span>
+                </div>
+
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    <strong>Trajetória na empresa:</strong> Entrei atuando em CX e CRM. Inicialmente fui responsável por CRM. Ao longo da evolução do projeto, passei a atuar como Product Owner em diferentes frentes do ecossistema Salesforce. Hoje minha atuação está fortemente concentrada na transformação do atendimento e das operações através do Salesforce.
+                </p>
+
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-brand-400"></i> Tecnologias & Domínios de Atuação
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-md bg-sky-950/40 border border-sky-800/60 text-xs text-sky-300 flex items-center gap-1.5"><i class="fa-solid fa-cloud-bolt text-sky-400"></i> Service Cloud</span>
+                        <span class="px-3 py-1 rounded-md bg-amber-950/40 border border-amber-800/60 text-xs text-amber-300 flex items-center gap-1.5"><i class="fa-solid fa-chart-line text-amber-400"></i> Sales Cloud</span>
+                        <span class="px-3 py-1 rounded-md bg-pink-950/40 border border-pink-800/60 text-xs text-pink-300 flex items-center gap-1.5"><i class="fa-solid fa-paper-plane text-pink-400"></i> Marketing Cloud</span>
+                        <span class="px-3 py-1 rounded-md bg-violet-950/40 border border-violet-800/60 text-xs text-violet-300 flex items-center gap-1.5"><i class="fa-solid fa-robot text-violet-400"></i> Agentforce</span>
+                        <span class="px-3 py-1 rounded-md bg-emerald-950/40 border border-emerald-800/60 text-xs text-emerald-300 flex items-center gap-1.5"><i class="fa-solid fa-brain text-emerald-400"></i> IA Aplicada</span>
+                        <span class="px-3 py-1 rounded-md bg-rose-950/40 border border-rose-800/60 text-xs text-rose-300 flex items-center gap-1.5"><i class="fa-solid fa-heart text-rose-400"></i> CRM</span>
+                        <span class="px-3 py-1 rounded-md bg-amber-950/40 border border-amber-800/60 text-xs text-amber-300 flex items-center gap-1.5"><i class="fa-solid fa-face-smile text-amber-300"></i> CX</span>
+                        <span class="px-3 py-1 rounded-md bg-teal-950/40 border border-teal-800/60 text-xs text-teal-300 flex items-center gap-1.5"><i class="fa-solid fa-database text-teal-400"></i> Dados</span>
+                        <span class="px-3 py-1 rounded-md bg-indigo-950/40 border border-indigo-800/60 text-xs text-indigo-300 flex items-center gap-1.5"><i class="fa-solid fa-diagram-project text-indigo-400"></i> Governança Transversal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASES REAIS COM FILTRO DINÂMICO E CARDS EXPANSÍVEIS -->
+        <section id="cases" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="p-3 rounded-xl bg-brand-500/10 border border-brand-500/20 text-brand-400">
+                        <i class="fa-solid fa-boxes-stacked text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-brand-400 uppercase tracking-widest block mb-1">Portfolio de Produtos</span>
+                        <h2 class="text-3xl font-black text-white">Cases Reais & Arquitetura</h2>
+                    </div>
+                </div>
+
+                <!-- FILTROS -->
+                <div class="flex flex-wrap gap-2 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800">
+                    <button onclick="filterCases('all')" id="tab-all" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-white transition-all">
+                        Todos (10)
+                    </button>
+                    <button onclick="filterCases('salesforce')" id="tab-salesforce" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-sky-400 hover:bg-sky-950/50 transition-all flex items-center gap-1">
+                        <i class="fa-solid fa-cloud-bolt text-sky-400"></i> Salesforce
+                    </button>
+                    <button onclick="filterCases('ai')" id="tab-ai" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-violet-400 hover:bg-violet-950/50 transition-all flex items-center gap-1">
+                        <i class="fa-solid fa-robot text-violet-400"></i> IA & LLM
+                    </button>
+                    <button onclick="filterCases('gov')" id="tab-gov" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-teal-400 hover:bg-teal-950/50 transition-all flex items-center gap-1">
+                        <i class="fa-solid fa-shield-halved text-teal-400"></i> Governança
+                    </button>
+                    <button onclick="filterCases('crm')" id="tab-crm" class="filter-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-emerald-400 hover:bg-emerald-950/50 transition-all flex items-center gap-1">
+                        <i class="fa-solid fa-piggy-bank text-emerald-400"></i> CRM & LTV
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTAINER DOS CARDS DE CASES -->
+            <div class="space-y-6" id="cases-container">
+
+                <!-- CASE 5: OUVIDORIA -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-sky-950/30 via-slate-900 to-slate-950 border border-sky-800/40 space-y-4" data-category="salesforce">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-sky-950/80 border border-sky-800 text-xs font-semibold text-sky-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-headset"></i> Service Cloud | Ouvidoria
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
+                            <i class="fa-solid fa-circle-check"></i> 85% Respostas no Sistema
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">Transformando a Ouvidoria em uma operação integrada ao Salesforce</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Implantação da frente de Ouvidoria no Service Cloud integrando negócio, TI e operação com respostas abaixo do tempo regulatório.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-5')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-sky-950/40 border border-slate-800 hover:border-sky-500/40 text-xs font-bold text-sky-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Arquitetura & Detalhes do Produto</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-5"></i>
+                    </button>
+
+                    <div id="case-5" class="details-pane space-y-4 pt-2">
+                        <div class="grid md:grid-cols-3 gap-4 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
+                            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                                <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-circle-info text-sky-400"></i> Contexto:</strong>
+                                A frente de Ouvidoria requeria centralização absoluta para garantir atendimento dentro do prazo regulatório rigoroso da ANS.
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                                <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-user-gear text-sky-400"></i> Atuação como PO:</strong>
+                                Mapeei o fluxo completo de tratativas entre Ouvidoria, Jurídico e Operação, construindo os requisitos de regras e automações no Service Cloud.
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-sky-950/30 border border-sky-800/50">
+                                <strong class="text-sky-400 block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-trophy"></i> Resultado:</strong>
+                                <span class="font-semibold text-white">85% das demandas passaram a ser respondidas via sistema abaixo do tempo regulatório.</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASE 6: SALES CLOUD -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-amber-950/30 via-slate-900 to-slate-950 border border-amber-800/40 space-y-4" data-category="salesforce">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-amber-950/80 border border-amber-800 text-xs font-semibold text-amber-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-bolt"></i> Sales Cloud | Ciclo Comercial
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
+                            <i class="fa-solid fa-gauge-high"></i> ~76% Redução de Ciclo
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">De 21 para 5 dias: redução do ciclo de apresentação de propostas</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Estruturação da jornada comercial no Sales Cloud (Lead à Oportunidade) e automação do cálculo de propostas na plataforma.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-6')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-amber-950/40 border border-slate-800 hover:border-amber-500/40 text-xs font-bold text-amber-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Arquitetura & Detalhes do Produto</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-6"></i>
+                    </button>
+
+                    <div id="case-6" class="details-pane space-y-4 pt-2">
+                        <div class="grid md:grid-cols-3 gap-4 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
+                            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                                <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-file-excel text-amber-400"></i> Desafio Inicial:</strong>
+                                A elaboração e cálculo de propostas comerciais dependiam de planilhas dispersas e processos manuais morosos.
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                                <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-sliders text-amber-400"></i> Solução de Produto:</strong>
+                                Desenhamos a jornada unificada no Salesforce Sales Cloud, automatizando as regras de precificação e aprovações.
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-amber-950/30 border border-amber-800/50">
+                                <strong class="text-amber-400 block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-bolt"></i> Ganho de Eficiência:</strong>
+                                Tempo de emissão de novas propostas caiu de 21 para 5 dias (~76% de ganho de produtividade).
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASE 7: CENTRAL EXCLUSIVO & SAC -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-sky-950/30 via-slate-900 to-slate-950 border border-sky-800/40 space-y-4" data-category="salesforce">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-sky-950/80 border border-sky-800 text-xs font-semibold text-sky-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-eye"></i> Service Cloud | Implantação Exclusivo & SAC
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
+                            <i class="fa-solid fa-star"></i> Implantação Destaque & Humanizada
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">Liderança End-to-End: Da Operação Exclusivo à Expansão SAC (~400 operadores)</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Implantação do Salesforce na Operação Exclusivo reconhecida como a melhor e mais humanizada da área. Rampa rápida de absorção em 15 dias de operação assistida e estabilização do TMA de 12 para 9-10 min. Liderança do planejamento de ponta a ponta para a expansão completa SAC (~400 pessoas).
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-7')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-sky-950/40 border border-slate-800 hover:border-sky-500/40 text-xs font-bold text-sky-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Métricas de Absorção & Próxima Fase</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-7"></i>
+                    </button>
+
+                    <div id="case-7" class="details-pane space-y-4 pt-2">
+                        <div class="space-y-3 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
+                            <div class="grid md:grid-cols-3 gap-3">
+                                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                                    <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-heart text-rose-400"></i> Feedback & Absorção:</strong>
+                                    Reconhecimento como a melhor e mais humanizada implantação. Curva de aprendizado rápida em apenas 15 dias de operação assistida.
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                                    <strong class="text-white block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-stopwatch text-amber-400"></i> Curva de TMA:</strong>
+                                    TMA base (8-9 min) subiu para 12 min nos primeiros dias de mudança e já estabilizou em 9-10 min com ajustes contínuos.
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-sky-950/40 border border-sky-800/50">
+                                    <strong class="text-sky-400 block mb-1 font-semibold flex items-center gap-1.5"><i class="fa-solid fa-bullseye"></i> Próxima Fase (End-to-End):</strong>
+                                    Liderança do planejamento e entrega completa da expansão para ~400 operadores do SAC com Visão 360º.
+                                </div>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-3">
+                                <i class="fa-solid fa-book-bookmark text-sky-400 text-lg"></i>
+                                <span><strong class="text-white">Gestão de Conhecimento:</strong> Material estruturado de ~500 páginas e suporte inteligente via IA/NotebookLM para garantir o sucesso do novo roll-out.</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASE 8: NOTEBOOKLM / IA NA CENTRAL -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-violet-950/40 via-slate-900 to-slate-950 border border-violet-800/50 space-y-4" data-category="ai">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-violet-950/80 border border-violet-800 text-xs font-semibold text-violet-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-brain"></i> IA Generativa | NotebookLM
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono flex items-center gap-1">
+                            <i class="fa-solid fa-spinner animate-spin text-xs"></i> Em Andamento
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">IA aplicada como primeira camada de suporte operacional</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Estruturação do NotebookLM para triagem inteligente de dúvidas, redução de chamados desnecessários e qualificação da abertura de tickets.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-8')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-violet-950/40 border border-slate-800 hover:border-violet-500/40 text-xs font-bold text-violet-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Arquitetura & Fluxo da IA</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-8"></i>
+                    </button>
+
+                    <div id="case-8" class="details-pane space-y-4 pt-2">
+                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 space-y-2">
+                            <span class="text-violet-400 font-sans block text-xs font-bold mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-sitemap"></i> FLUXO CONCEITUAL DE TRIAGEM COM IA:
+                            </span>
+                            <div class="flex flex-wrap items-center gap-2 text-slate-300">
+                                <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">Dúvida do Operador</span>
+                                <i class="fa-solid fa-arrow-right text-slate-600"></i>
+                                <span class="px-2 py-1 rounded bg-slate-900 border border-slate-800">Consulta Base IA</span>
+                                <i class="fa-solid fa-arrow-right text-slate-600"></i>
+                                <span class="px-2 py-1 rounded bg-violet-950 text-violet-300 border border-violet-800">Análise Inteligente</span>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-2 font-sans text-xs pt-2">
+                                <div class="p-2.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-lightbulb"></i> Dúvida Resolvível → Orientação Imediata ao Operador
+                                </div>
+                                <div class="p-2.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-300 flex items-center gap-2">
+                                    <i class="fa-solid fa-bug"></i> Bug Real → Abertura Estruturada do Chamado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASE 9: AGENTFORCE -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-violet-950/40 via-slate-900 to-slate-950 border border-violet-800/50 space-y-4" data-category="ai">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-violet-950/80 border border-violet-800 text-xs font-semibold text-violet-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-robot"></i> Agentforce | IA Conversacional
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+                            Pioneiro América Latina
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">IA Conversacional Autônoma para Agendamentos Complexos</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Participação na construção de agente de IA voltado ao agendamento autônomo com regras de negócio densas e alta complexidade operacional.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-9')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-violet-950/40 border border-slate-800 hover:border-violet-500/40 text-xs font-bold text-violet-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Detalhes da Solução Agentforce</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-9"></i>
+                    </button>
+
+                    <div id="case-9" class="details-pane space-y-4 pt-2">
+                        <p class="text-xs text-slate-300 leading-relaxed border-t border-slate-800/80 pt-3">
+                            Atuação direta no apoio e desenho funcional da solução pioneira baseada na plataforma Agentforce do Salesforce. O desafio envolveu traduzir a complexidade de agendas, autorizações e disponibilidades operacionais em diálogos fluidos conduzidos pela IA.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- CASE 10: GOVERNANÇA TRANSVERSAL -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-teal-950/30 via-slate-900 to-slate-950 border border-teal-800/40 space-y-4" data-category="gov">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-teal-950/80 border border-teal-800 text-xs font-semibold text-teal-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-network-wired"></i> Governança Transversal | POs
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-mono">
+                            Padrão Unificado
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">Unificação de Casos e Governança Entre Squads do Programa</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Atuação no fórum de POs (frente "Desentupidora") para solução de gargalos transversais e padronização da arquitetura de Casos.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-10')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-teal-950/40 border border-slate-800 hover:border-teal-500/40 text-xs font-bold text-teal-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Arquitetura da Governança</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-10"></i>
+                    </button>
+
+                    <div id="case-10" class="details-pane space-y-4 pt-2">
+                        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex flex-wrap items-center gap-2 border-t border-slate-800/80">
+                            <span>Múltiplos Padrões por Área</span> <i class="fa-solid fa-arrow-right text-slate-600"></i>
+                            <span>Governança Fórum POs</span> <i class="fa-solid fa-arrow-right text-slate-600"></i>
+                            <span class="text-teal-400 font-bold">Padrão Unificado de Casos</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASE 11: MARKETING CLOUD -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-pink-950/30 via-slate-900 to-slate-950 border border-pink-800/40 space-y-4" data-category="salesforce">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-pink-950/80 border border-pink-800 text-xs font-semibold text-pink-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-paper-plane"></i> Marketing Cloud
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-mono">
+                            CRM & Automações
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">Da implantação AS IS à operação complexa de CRM</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Evolução do Marketing Cloud para estruturar réguas automatizadas, taxonomias e comunicação com áreas operacionais críticas.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-11')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-pink-950/40 border border-slate-800 hover:border-pink-500/40 text-xs font-bold text-pink-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Evolução do Produto</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-11"></i>
+                    </button>
+
+                    <div id="case-11" class="details-pane space-y-4 pt-2">
+                        <p class="text-xs text-slate-300 leading-relaxed border-t border-slate-800/80 pt-3">
+                            Atuação como PO responsável pelo Marketing Cloud, migrando de réguas pontuais para automações complexas integradas a remoção/movimentação de clientes e recursos próprios.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- CASE 12: PREFERÊNCIAS -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-emerald-950/30 via-slate-900 to-slate-950 border border-emerald-800/40 space-y-4" data-category="crm">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-emerald-950/80 border border-emerald-800 text-xs font-semibold text-emerald-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-sliders"></i> Dados Quentes & CX
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono">
+                            Hiperpersonalização
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">Organização, Qualificação de Contatos e Central de Preferências</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Ranking de confiabilidade de contatos por recência/fonte e criação da Central de Preferências para empoderar a escolha do cliente.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-12')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/40 text-xs font-bold text-emerald-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Etapas de Dados & CX</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-12"></i>
+                    </button>
+
+                    <div id="case-12" class="details-pane space-y-4 pt-2">
+                        <div class="grid md:grid-cols-3 gap-3 text-xs text-slate-300 pt-2 border-t border-slate-800/80">
+                            <div class="p-3 rounded-lg bg-slate-950 border border-slate-800">
+                                <strong class="text-white block mb-1">1. Mapeamento:</strong> Origens e canais dispersos de contatos.
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-950 border border-slate-800">
+                                <strong class="text-white block mb-1">2. Priorização:</strong> Score por recência e peso da fonte.
+                            </div>
+                            <div class="p-3 rounded-lg bg-emerald-950/30 border border-emerald-800/50">
+                                <strong class="text-emerald-400 block mb-1">3. Preferências:</strong> Autonomia de canais/temas para o cliente.
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASE 13: FDA -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-teal-950/30 via-slate-900 to-slate-950 border border-teal-800/40 space-y-4" data-category="gov">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-teal-950/80 border border-teal-800 text-xs font-semibold text-teal-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-halved"></i> FDA | Processos Complexos
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check"></i> Sucesso Absoluto de Implantação
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">Estruturação de Produto em Processo de Alta Complexidade Regulatória</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Implantação do FDA realizada junto da Central Exclusivo com pouquíssimas ocorrências e altíssima satisfação de ponta a ponta entre Regulação (Auditoria Médica), Redes, Backoffice, Tributário e Financeiro.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-13')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-teal-950/40 border border-slate-800 hover:border-teal-500/40 text-xs font-bold text-teal-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Stakeholders & Áreas Envolvidas</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-13"></i>
+                    </button>
+
+                    <div id="case-13" class="details-pane space-y-4 pt-2">
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800/80">
+                            <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-scale-balanced text-teal-400"></i> Regulação (Auditoria)</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-circle-nodes text-teal-400"></i> Redes</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-building text-teal-400"></i> Backoffice</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-calculator text-teal-400"></i> Tributário</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-coins text-teal-400"></i> Financeiro</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- CASE 14: INTERCÂMBIO -->
+                <article class="case-card p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-teal-950/30 via-slate-900 to-slate-950 border border-teal-800/40 space-y-4" data-category="gov">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="px-3 py-1 rounded-md bg-teal-950/80 border border-teal-800 text-xs font-semibold text-teal-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-comments"></i> Redes Intercâmbio | Omnichannel
+                        </span>
+                        <span class="px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono flex items-center gap-1">
+                            <i class="fa-solid fa-pen-ruler text-xs"></i> Em Refinamento
+                        </span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-white">Mapeamento e Unificação da Jornada de Atendimento Omnichannel</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Refinamento e mapeamento end-to-end integrando canais (incluindo WhatsApp) para unificar tratativas operacionais em uma jornada única.
+                    </p>
+
+                    <button onclick="toggleCaseDetails('case-14')" class="w-full py-2.5 px-4 rounded-xl bg-slate-950 hover:bg-teal-950/40 border border-slate-800 hover:border-teal-500/40 text-xs font-bold text-teal-400 flex items-center justify-between transition-all">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-diagram-project"></i> Ver Detalhes do Mapeamento</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300" id="icon-case-14"></i>
+                    </button>
+
+                    <div id="case-14" class="details-pane space-y-4 pt-2">
+                        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800/80">
+                            <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-route text-slate-400"></i> Process Mapping</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp Integration</span>
+                            <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs font-mono text-slate-300 flex items-center gap-1"><i class="fa-solid fa-timeline text-slate-400"></i> Jornada Única</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- FOLHA -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                            <i class="fa-solid fa-newspaper text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block mb-1">Experiência Anterior</span>
+                            <h2 class="text-2xl font-bold text-white">Folha de S.Paulo</h2>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-slate-950 border border-slate-800 text-xs font-mono text-slate-400 w-fit">
+                        Dez/2013 – Mai/2019
+                    </span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-300">
+                    Atuação em diferentes posições que demonstram que minha visão estratégica de cliente, dados e retenção antecede a experiência com a plataforma Salesforce.
+                </p>
+
+                <div class="p-6 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800/80 pb-3">
+                        <strong class="text-emerald-400 text-sm font-bold uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-piggy-bank text-emerald-400"></i> Case Relevante — Retenção por LTV
+                        </strong>
+                        <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded border border-emerald-500/20 w-fit">
+                            Economia estimada de R$ 1,7 milhão
+                        </span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Estratégia de retenção baseada no cálculo de LTV (Life Time Value) para direcionamento de ações com públicos prioritários, utilizando estrategicamente o estoque de coleções de produtos para evitar cancelamentos de assinaturas.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RODAPÉ & CONTATO -->
+        <footer id="contato" class="scroll-mt-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 border-t border-slate-800">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div>
+                    <h3 class="text-lg font-bold text-white">Gustavo Guenka Xavier</h3>
+                    <p class="text-xs text-slate-400">Analista de CRM Sênior | Product Owner (Salesforce & IA)</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="https://linkedin.com/in/gustavoguenka" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-white hover:border-slate-700 transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-linkedin text-sm text-sky-400"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <button onclick="copyContactInfo()" class="px-4 py-2 rounded-lg bg-brand-400 text-slate-950 text-xs font-bold hover:bg-brand-500 transition-all flex items-center gap-2">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>gustavoguenka@gmail.com</span>
+                    </button>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 text-center mt-12">
+                © Gustavo Guenka Xavier. Portfólio Profissional Interativo.
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- SCRIPTS DE INTERATIVIDADE -->
+    <script>
+        function filterCases(category) {
+            const cards = document.querySelectorAll('.case-card');
+            const tabs = document.querySelectorAll('.filter-tab');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-slate-800', 'text-white');
+                tab.classList.add('text-slate-400');
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if (activeTab) {
+                activeTab.classList.add('bg-slate-800', 'text-white');
+                activeTab.classList.remove('text-slate-400');
             }
-        });
-    }
 
-    function toggleCaseDetails(id) {
-        const pane = document.getElementById(id);
-        const icon = document.getElementById(`icon-${id}`);
-
-        if (pane.classList.contains('open')) {
-            pane.classList.remove('open');
-            if (icon) icon.style.transform = 'rotate(0deg)';
-        } else {
-            pane.classList.add('open');
-            if (icon) icon.style.transform = 'rotate(180deg)';
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
         }
-    }
 
-    function copyContactInfo() {
-        const email = "gustavoguenka@gmail.com";
-        
-        const tempInput = document.createElement("textarea");
-        tempInput.value = email;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempInput);
+        function toggleCaseDetails(id) {
+            const pane = document.getElementById(id);
+            const icon = document.getElementById(`icon-${id}`);
 
-        const toast = document.getElementById("toast");
-        const btnText = document.getElementById("copy-btn-text");
-        
-        if (btnText) btnText.innerText = "Copiado!";
-        toast.classList.remove("translate-y-20", "opacity-0");
-        toast.classList.add("translate-y-0", "opacity-100");
+            if (pane.classList.contains('open')) {
+                pane.classList.remove('open');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            } else {
+                pane.classList.add('open');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            }
+        }
 
-        setTimeout(() => {
-            toast.classList.remove("translate-y-0", "opacity-100");
-            toast.classList.add("translate-y-20", "opacity-0");
-            if (btnText) btnText.innerText = "Copiar Email";
-        }, 3000);
-    }
-</script>
+        function copyContactInfo() {
+            const email = "gustavoguenka@gmail.com";
+            
+            const tempInput = document.createElement("textarea");
+            tempInput.value = email;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById("toast");
+            const btnText = document.getElementById("copy-btn-text");
+            
+            if (btnText) btnText.innerText = "Copiado!";
+            toast.classList.remove("translate-y-20", "opacity-0");
+            toast.classList.add("translate-y-0", "opacity-100");
+
+            setTimeout(() => {
+                toast.classList.remove("translate-y-0", "opacity-100");
+                toast.classList.add("translate-y-20", "opacity-0");
+                if (btnText) btnText.innerText = "Copiar Email";
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
